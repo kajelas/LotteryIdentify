@@ -1,5 +1,18 @@
 <web-app>
-    <display-name>Touhou Crawler Application</display-name>
+    <display-name>Lottery Identify Application</display-name>
+    
+   	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
     <!-- Configure ContextLoaderListener to use AnnotationConfigWebApplicationContext
         instead of the default XmlWebApplicationContext -->
     <context-param>
@@ -41,8 +54,28 @@
     </servlet>
 
     <!-- map all requests for /app/* to the dispatcher servlet -->
+	<servlet-mapping>
+    	<servlet-name>default</servlet-name>
+    	<url-pattern>/images/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+    	<servlet-name>default</servlet-name>
+    	<url-pattern>/img/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+    	<servlet-name>default</servlet-name>
+    	<url-pattern>/fonts/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+    	<servlet-name>default</servlet-name>
+    	<url-pattern>/javascripts/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+    	<servlet-name>default</servlet-name>
+    	<url-pattern>/stylesheets/*</url-pattern>
+	</servlet-mapping> 
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/*</url-pattern>
-    </servlet-mapping>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping> 
 </web-app>
