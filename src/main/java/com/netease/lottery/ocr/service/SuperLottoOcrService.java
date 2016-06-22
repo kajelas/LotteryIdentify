@@ -12,8 +12,7 @@ import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -21,14 +20,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.netease.lottery.ocr.util.StringRegUtil;
 
-import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.Tesseract1;
 import net.sourceforge.tess4j.util.ImageHelper;
 import net.sourceforge.tess4j.util.LoadLibs;
 
 @Service
 public class SuperLottoOcrService implements LotteryOcrService
 {
-	private final Log log = LogFactory.getLog(getClass());
+	private final Logger log = Logger.getLogger(getClass());
 
 	@Autowired
 	@Qualifier("tesseractProps")
@@ -37,12 +36,13 @@ public class SuperLottoOcrService implements LotteryOcrService
 	@Autowired
 	private StringRegUtil stringRegUtil;
 
-	private Tesseract instanceSuperLotto;
+	private Tesseract1 instanceSuperLotto;
 
 	@PostConstruct
 	public void init()
 	{
-		instanceSuperLotto = new Tesseract();
+		//log.info(System.getProperty("java.io.tmpdir"));
+		instanceSuperLotto = new Tesseract1();
 		instanceSuperLotto.setLanguage("mergedSuperLotto");
 		instanceSuperLotto.setDatapath(LoadLibs.extractTessResources("tessdata").getAbsolutePath());
 		for (Object key : ocrProps.keySet())
@@ -54,12 +54,17 @@ public class SuperLottoOcrService implements LotteryOcrService
 	@Override
 	public Map<String, String> ocr(MultipartFile file) throws Exception
 	{
+		//log.info(System.getProperty("java.io.tmpdir"));
+		log.info("uploaded...");
 		BufferedImage image = ImageIO.read(file.getInputStream());
 		// 图片锐化,自己使用中影响识别率的主要因素是针式打印机字迹不连贯,所以锐化反而降低识别率
 		image = ImageHelper.convertImageToBinary(image);
 		// 图片放大5倍,增强识别率(很多图片本身无法识别,放大1.5倍时就可以轻易识
 		image = ImageHelper.getScaledInstance(image, (int) (image.getWidth() * 1.5), (int) (image.getHeight() * 1.5));
 
+		//System.out.println(LoadLibsForWeb.TESS4J_TEMP_DIR);
+		//instanceSuperLotto.setDatapath(LoadLibsForWeb.TESS4J_TEMP_DIR);
+		log.info("pre-processed...");
 		String result = instanceSuperLotto.doOCR(image);
 		log.info(result);
 		return mergeOcrResult(result);

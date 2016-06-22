@@ -103,11 +103,12 @@
 	                <artifactId>jetty-maven-plugin</artifactId>
 	                <version>9.3.7.v20160115</version>
 	                <configuration>
+        				<war>${project.basedir}/target/LotteryIdentify.war</war>
 	                    <webAppSourceDirectory>${project.basedir}/src/main/webapp</webAppSourceDirectory>
 	                    <webApp>
 	                        <contextPath>/</contextPath>
 	                        <resourceBases>
-	                            <resourceBase>${project.basedir}/src/main/resources</resourceBase>
+	                            <resourceBase>${project.basedir}/src/main/webapp</resourceBase>
 	                        </resourceBases>
 	                    </webApp>
 	                    <scanIntervalSeconds>3</scanIntervalSeconds>

@@ -28,6 +28,7 @@ function uploadInit() {
         autoUpload : true,
         add: function (e, data) {
         	$('#statusHint').text('彩票上传中...');
+        	$('#progress').show();
         	$('#progress .bar').show();
         	$('#progress .bar').css('width', '0%');
         	progress = 0;
@@ -45,10 +46,12 @@ function uploadInit() {
         },
         fail: function (e, data) {
         	$('#progress .bar').hide();
+        	$('#progress').hide();
         	timer.stop();
         	$('#statusHint').text('彩票解析失败，请重试');
         },
         done: function (e, data) {
+        	$('#progress').hide();
         	$('#progress .bar').hide();
         	timer.stop();
         	$('#statusHint').text('彩票上传并解析完毕，您可以上传下张彩票');
@@ -161,7 +164,7 @@ function hidefields() {
 				<a id="实体彩票识别" class="anchor"
 					href="#%E5%AE%9E%E4%BD%93%E5%BD%A9%E7%A5%A8%E8%AF%86%E5%88%AB"
 					aria-hidden="true"><span aria-hidden="true"
-					class="octicon octicon-link"></span></a>实体彩票识别
+					class="octicon octicon-link"></span></a>项目简介
 			</h3>
 
 			<p>本项目旨在通过技术手段为彩民和彩票店主提供线下购彩的辅助服务。
@@ -174,7 +177,7 @@ function hidefields() {
     			<input type="file" name="loto" multiple>
     			<span id="statusHint">点击这里上传<strong>大乐透</strong>彩票照片(请尽量正对彩票拍摄)</span>
 			</a>
-			<div id="progress">
+			<div id="progress" hidden="hidden">
     			<div class="bar" style="width: 0%;"></div>
 			</div>
 			<div id="ocrResult" hidden="hidden">识别结果:</div>
@@ -205,6 +208,7 @@ function hidefields() {
 		</section>
 
 		<footer>
+			<p>因财力有限，目前使用的是单核服务器，速度较慢，敬请谅解=￣ω￣=</p>
 			<span class="ribbon-outer"> <span class="ribbon-inner">
 					<p>
 						This project by <a href="https://github.com/kajelas">kajelas</a>
