@@ -111,6 +111,7 @@
 	                            <resourceBase>${project.basedir}/src/main/webapp</resourceBase>
 	                        </resourceBases>
 	                    </webApp>
+	                    <scanTargets><scanTarget>${project.basedir}/src/main/webapp</scanTarget></scanTargets>
 	                    <scanIntervalSeconds>3</scanIntervalSeconds>
 	                    <classesDirectory>target/classes</classesDirectory>
 	                    <requestLog implementation="org.eclipse.jetty.server.NCSARequestLog">

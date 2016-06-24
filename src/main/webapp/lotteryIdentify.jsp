@@ -22,6 +22,7 @@
 <script>
 var progress;
 var timer;
+var isIOSExpand=0;
 function uploadInit() {
     $('#demo').fileupload({
         dataType: 'json',
@@ -117,6 +118,16 @@ $(document).ready(function () {
   });
 $(function () {
 	uploadInit();
+	$("#downloadButtonIOS").click(function(){
+		if (isIOSExpand == 0) {
+	    	$("#downloadBarCode").animate({height:'200px',width:'200px',opacity:'1'},"slow");
+	    	//$("#downloadBarCode").css('z-index','10');
+	    	isIOSExpand=1;
+		} else {
+			$("#downloadBarCode").animate({height:'0px',width:'0px',opacity:'0'},"slow");
+			isIOSExpand=0;
+		}
+	});
 });
 function hidefields() {
 	$('#codesHint').hide();
@@ -150,11 +161,13 @@ function hidefields() {
 		</header>
 
 		<section id="downloads">
-			<span class="inner"> <a class="zip"><em>Android</em>暂不开放</a>
-				<a class="tgz"><em>IOS</em>暂不开放</a>
+			<span class="inner"> 
+				<a class="zip"><em>Android</em>暂不开放</a>
+				<a style="cursor:pointer;" id="downloadButtonIOS" class="tgz"><em>IOS</em>点我扫码下载</a>
 			</span>
 		</section>
 
+		<img id="downloadBarCode" src="/images/downloadCode.png" height="0px" width="0px" style="position:relative;display:block;margin-left:auto;margin-right:auto;top:10px;opacity:0;z-index:10"/>
 
 		<span class="banner-fix"></span>
 
@@ -172,7 +185,7 @@ function hidefields() {
 				由于时间有限，暂时将彩种限定为大乐透，形式为IOS APP。 后续会完善彩种并加入一键生成彩票投注单图片的功能。</p>
 
 			<hr>
-			<h3>演示</h3>
+			<h3>识别效果演示</h3>
 			<a id="demo" class="file" data-url="lotteryUpload">
     			<input type="file" name="loto" multiple>
     			<span id="statusHint">点击这里上传<strong>大乐透</strong>彩票照片(请尽量正对彩票拍摄)</span>
