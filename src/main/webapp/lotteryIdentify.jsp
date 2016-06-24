@@ -167,7 +167,7 @@ function hidefields() {
 			</span>
 		</section>
 
-		<img id="downloadBarCode" src="/images/downloadCode.png" height="0px" width="0px" style="position:relative;display:block;margin-left:auto;margin-right:auto;top:10px;opacity:0;z-index:10"/>
+		<img id="downloadBarCode" src="images/downloadCode.png" height="0px" width="0px" style="position:relative;display:block;margin-left:auto;margin-right:auto;top:10px;opacity:0;z-index:10"/>
 
 		<span class="banner-fix"></span>
 
