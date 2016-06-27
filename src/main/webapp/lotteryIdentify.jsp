@@ -23,6 +23,7 @@
 var progress;
 var timer;
 var isIOSExpand=0;
+var isTrailerExpand=0;
 function uploadInit() {
     $('#demo').fileupload({
         dataType: 'json',
@@ -119,16 +120,45 @@ $(document).ready(function () {
 $(function () {
 	uploadInit();
 	$("#downloadButtonIOS").click(function(){
-		if (isIOSExpand == 0) {
-	    	$("#downloadBarCode").animate({height:'200px',width:'200px',opacity:'1'},"slow");
-	    	//$("#downloadBarCode").css('z-index','10');
-	    	isIOSExpand=1;
-		} else {
-			$("#downloadBarCode").animate({height:'0px',width:'0px',opacity:'0'},"slow");
-			isIOSExpand=0;
-		}
+		$("#trailer").css('height','0');
+		$("#trailer").css('width','0');
+		$("#trailer").css('opacity','0');
+		$("#trailerEmbed").attr('height','0');
+		$("#trailerEmbed").attr('width','0');
+		isTrailerExpand=0;
+		toggleDownloadCode();
+	});
+	$("#trailerButton").click(function(){
+		$("#downloadBarCode").css('height','0');
+		$("#downloadBarCode").css('width','0');
+		$("#downloadBarCode").css('opacity','0');
+		isIOSExpand=0;
+		toggleTrailer();
 	});
 });
+function toggleDownloadCode() {
+	if (isIOSExpand == 0) {
+    	$("#downloadBarCode").animate({height:'200',width:'200',opacity:'1'},"slow");
+    	//$("#downloadBarCode").css('z-index','10');
+    	isIOSExpand=1;
+	} else {
+		$("#downloadBarCode").animate({height:'0',width:'0',opacity:'0'},"slow");
+		isIOSExpand=0;
+	}
+}
+function toggleTrailer() {
+	if (isTrailerExpand == 0) {
+		$("#trailer").animate({height:'400',width:'480',opacity:'1'},"slow");
+		$("#trailerEmbed").attr('height','400');
+		$("#trailerEmbed").attr('width','480');
+    	isTrailerExpand=1;
+	} else {
+		$("#trailerEmbed").attr('height','0');
+		$("#trailerEmbed").attr('width','0');
+		$("#trailer").animate({height:'0',width:'0',opacity:'0'},"slow");
+		isTrailerExpand=0;
+	}
+}
 function hidefields() {
 	$('#codesHint').hide();
 	$('#codes').hide();
@@ -162,13 +192,17 @@ function hidefields() {
 
 		<section id="downloads">
 			<span class="inner"> 
-				<a class="zip"><em>Android</em>暂不开放</a>
+				<a style="cursor:pointer;" id="trailerButton" class="zip"><em>Video</em>APP使用演示</a>
 				<a style="cursor:pointer;" id="downloadButtonIOS" class="tgz"><em>IOS</em>点我扫码下载</a>
 			</span>
 		</section>
 
-		<img id="downloadBarCode" src="images/downloadCode.png" height="0px" width="0px" style="position:relative;display:block;margin-left:auto;margin-right:auto;top:10px;opacity:0;z-index:10"/>
-
+		<img id="downloadBarCode" src="images/downloadCode.png" height="0" width="0" style="position:relative;display:block;margin-left:auto;margin-right:auto;top:10px;opacity:0;z-index:10"/>
+	
+		<div id="trailer" style="width:0;height:0;position:relative;display:block;margin-left:auto;margin-right:auto;top:10px;opacity:0;z-index:10">
+			<embed id="trailerEmbed" width="480" height="300" src="http://player.youku.com/player.php/sid/XMTYyMjcxOTk5Ng==/v.swf" allowFullScreen="true" quality="high" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+		</div>
+		
 		<span class="banner-fix"></span>
 
 
