@@ -30,7 +30,7 @@ public class LotteryOcrController
 		return jsonUtil.serialize(resultMap);
 	}
 
-	@RequestMapping("/lotteryIdentifyPage")
+	@RequestMapping("/lotteryIdentifyPage.html")
 	public String uploadLottery(ModelMap modelMap) throws Exception
 	{
 		return "lotteryIdentify";

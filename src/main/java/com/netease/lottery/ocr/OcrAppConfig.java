@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+//import org.apache.commons.logging.Log;
+//import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +22,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 { "com.netease.lottery.ocr" })
 public class OcrAppConfig
 {
-	private final Log log = LogFactory.getLog(getClass());
+	//private final Log log = LogFactory.getLog(getClass());
 
 	@Bean(name = "tesseractProps")
 	public Properties tesseractProps() throws IOException
